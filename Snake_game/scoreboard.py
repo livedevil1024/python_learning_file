@@ -1,11 +1,14 @@
 from turtle import Turtle
 
+from nbformat import read
+
 class Scoreboard(Turtle):
 
     def __init__(self):
         super().__init__()
         self.score = 0
-        self.high_score = 0
+        with open("D:\C projects\Python_programs_test\Snake_game\data.txt") as file:
+            self.high_score = int(file.read())
         self.color("white")
         self.penup()
         self.goto(0,270)
@@ -24,6 +27,8 @@ class Scoreboard(Turtle):
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
+            with open("D:\C projects\Python_programs_test\Snake_game\data.txt",mode="w") as data:
+                data.write(f"{self.high_score}")
         self.score = 0
         self.clear()
         self.score_update()
