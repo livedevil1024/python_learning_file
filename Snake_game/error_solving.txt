@@ -1,0 +1,1 @@
+if the you have error for data.txt not present while opening file. Then use the absolut path to open the data.txt file
