@@ -23,17 +23,17 @@ response = requests.get(STOCK_ENDPOINT,params= stock_para)
 data = response.json()["Time Series (Daily)"]
 data_list = [data for (key,data) in data.items()]
 yesterdays_data_closing = data_list[0]["4. close"]
-print(yesterdays_data_closing)
+#print(yesterdays_data_closing)
 
 day_before_yesterday_data_closing = data_list[1]["4. close"]
-print(day_before_yesterday_data_closing)
+#print(day_before_yesterday_data_closing)
 
 difference = abs(float(yesterdays_data_closing) - float(day_before_yesterday_data_closing))
-print(difference)
+#print(difference)
 
 
 diff_percent = (difference/float(yesterdays_data_closing)) * 100
-print(diff_percent)
+#print(diff_percent)
 
 if diff_percent > 5:
     news_para ={
@@ -43,10 +43,10 @@ if diff_percent > 5:
     }
     news = requests.get(NEWS_ENDPOINT,params=news_para)
     article = news.json()["articles"]
-    print(article)
+    #print(article)
 
     three_article= article[:3]
-    print(three_article)    
+    #print(three_article)    
 
     formatted_article_List =[f"Headline : {article['title']}. \n Breif : {article['description']}. " for article in three_article]
 
@@ -55,18 +55,5 @@ if diff_percent > 5:
         message = client.messages.create(
         body=articles,
         from_="+18125613056",
-        to="+918956495091",
+        to="Your phone number",
     )
-
-
-#Optional TODO: Format the message like this: 
-"""
-TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-"""
-
