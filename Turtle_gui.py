@@ -29,7 +29,7 @@ def Draw_sprograph(size_of_gap):
         jimmy.circle(100)
         jimmy.setheading(jimmy.heading() + size_of_gap)
     
-Draw_sprograph(1)
+Draw_sprograph(4)
 
 
 Screen = turtle.Screen()
